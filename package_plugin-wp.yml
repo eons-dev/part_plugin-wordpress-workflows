@@ -27,4 +27,4 @@ jobs:
         python -m pip install ebbs
     - name: Build package
       run: |
-        ebbs -l wordpress_plugin generated
+        ebbs -v -l wordpress_plugin generated
