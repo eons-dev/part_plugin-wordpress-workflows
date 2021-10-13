@@ -29,7 +29,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install ebbs
+        pip install jsonpickle ebbs
     - name: Build and publish
       run: |
         ebbs -v -l publish inc --repo-username ${{ secrets.INFRASTRUCTURE_USERNAME }} --repo-password ${{ secrets.INFRASTRUCTURE_PASSWORD }} --version ${{ github.event.release.tag_name }} --visibility 'private'
