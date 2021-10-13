@@ -1,0 +1,32 @@
+# This workflow will build then upload the plugin to infrastructure.tech.
+
+name: Publish Plugin
+
+on:
+  release:
+    types: [created]
+
+# on:
+#   push:
+#     branches: [ main ]
+#   pull_request:
+#     branches: [ main ]
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install ebbs
+    - name: Build and publish
+      run: |
+        ebbs -l publish inc --repo-username {{secrets.INFRASTRUCTURE_USERNAME}} --repo-password {{secrets.INFRASTRUCTURE_PASSWORD}} --version ${{ github.event.release.tag_name }} --visibility 'private'
