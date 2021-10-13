@@ -33,4 +33,4 @@ jobs:
     - name: Build and publish
       run: |
         ebbs -v -l wordpress_plugin generated
-        ebbs -v -l publish generated ${{ secrets.INFRASTRUCTURE_USERNAME }} --repo-password ${{ secrets.INFRASTRUCTURE_PASSWORD }} --version ${{ github.event.release.tag_name }} --visibility 'private'
+        ebbs -v -l publish generated --repo-username ${{ secrets.INFRASTRUCTURE_USERNAME }} --repo-password ${{ secrets.INFRASTRUCTURE_PASSWORD }} --version ${{ github.event.release.tag_name }} --visibility 'private'
